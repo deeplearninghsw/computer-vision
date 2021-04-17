@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 
 from pandas.core.frame import DataFrame
 from utils.setup import df_config
@@ -8,6 +9,10 @@ from utils.map import df_map_features
 def data_formatting(df: DataFrame, y_target: str):
     # Pass target data into df_config
     df_config["target"] = [y_target]
+
+    # Shaving of unused cols/feature
+    df = pd.concat([df[df_config["features"]],
+                    df[df_config["target"]]], axis=1)
 
     # Replace "?" data with numpy NaN
     df = df.replace("?", np.nan)
@@ -24,11 +29,11 @@ def data_formatting(df: DataFrame, y_target: str):
 
     # Map the data consisting of words to numbers to get processed of the algorithm
     # Config data used to train and test the model
-    df_train = df[df_config["train"]]
+    df_train = df[df_config["features"]]
     df_train = dict_mapping(df_train)
 
     # Config data used to evaluate the model on unknown and incomplete data
-    df_eval = df_only_na[df_config["eval"]]
+    df_eval = df_only_na[df_config["features"]]
     df_eval = dict_mapping(df_eval)
 
     # Config data considered being the target output of the model and eval model
