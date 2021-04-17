@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 df_map_features = defaultdict(dict)
 
 df_map_features["brand"] = [{
@@ -25,6 +26,16 @@ df_map_features["brand"] = [{
     "toyota": 19,
     "volkswagen": 20,
     "volvo": 21
+}]
+
+df_map_features["fuel-type"] = [{
+    "diesel": 0,
+    "gas": 1
+}]
+
+df_map_features["fuel-type-back"] = [{
+    0: "diesel",
+    1: "gas"
 }]
 
 df_map_features["aspiration"] = [{
@@ -86,46 +97,3 @@ df_map_features["fuel-system"] = [{
     "spdi": 6,
     "spfi": 7
 }]
-
-df_map_pred = defaultdict(dict)
-
-df_map_pred["fuel-type"] = [{
-    "diesel": 0,
-    "gas": 1
-}]
-
-df_map_pred["fuel-type-back"] = [{
-    0: "diesel",
-    1: "gas"
-}]
-
-df_config = {
-    "head": [
-        "symboling",
-        "normalized-losses",
-        "brand",
-        "fuel-type",
-        "aspiration",
-        "num-of-doors",
-        "body-style",
-        "drive-wheels",
-        "engine-location",
-        "wheel-base",
-        "length",
-        "width",
-        "height",
-        "curb-weight",
-        "engine-type",
-        "num-of-cylinders",
-        "engine-size",
-        "fuel-system",
-        "bore",
-        "stroke",
-        "compression-ratio",
-        "horsepower",
-        "peak-rpm",
-        "city-mpg",
-        "highway-mpg",
-        "price"
-    ]
-}
