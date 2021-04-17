@@ -31,7 +31,7 @@ df_config = {
         "highway-mpg",
         "price"
     ],
-    "train": [
+    "features": [
         "brand",
         "aspiration",
         "num-of-doors",
@@ -55,30 +55,5 @@ df_config = {
         "city-mpg",
         "highway-mpg",
         "price"
-    ],
-    "eval": [
-        "brand",
-        "aspiration",
-        "num-of-doors",
-        "body-style",
-        "drive-wheels",
-        "engine-location",
-        "wheel-base",
-        "length",
-        "width",
-        "height",
-        "curb-weight",
-        "engine-type",
-        "num-of-cylinders",
-        "engine-size",
-        "fuel-system",
-        "bore",
-        "stroke",
-        "compression-ratio",
-        "horsepower",
-        "peak-rpm",
-        "city-mpg",
-        "highway-mpg",
-        "price"
-    ],
+    ]
 }
