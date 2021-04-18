@@ -2,17 +2,12 @@ import numpy as np
 import pandas as pd
 
 from pandas.core.frame import DataFrame
-from utils.setup import df_config
 from utils.map import df_map_features
 
 
-def data_formatting(df: DataFrame, y_target: str):
-    # Pass target data into df_config
-    df_config["target"] = [y_target]
-
+def data_formatting(df: DataFrame, y_target: str, features: list):
     # Shaving of unused cols/feature
-    df = pd.concat([df[df_config["features"]],
-                    df[df_config["target"]]], axis=1)
+    df = pd.concat([df[features], df[y_target]], axis=1)
 
     # Replace "?" data with numpy NaN
     df = df.replace("?", np.nan)
@@ -29,18 +24,18 @@ def data_formatting(df: DataFrame, y_target: str):
 
     # Map the data consisting of words to numbers to get processed of the algorithm
     # Config data used to train and test the model
-    df_train = df[df_config["features"]]
+    df_train = df[features]
     df_train = dict_mapping(df_train)
 
     # Config data used to evaluate the model on unknown and incomplete data
-    df_eval = df_only_na[df_config["features"]]
+    df_eval = df_only_na[features]
     df_eval = dict_mapping(df_eval)
 
     # Config data considered being the target output of the model and eval model
-    df_target = df[df_config["target"]]
+    df_target = df[[y_target]]
     df_target = dict_mapping(df_target)
 
-    df_target_eval = df_only_na[df_config["target"]]
+    df_target_eval = df_only_na[[y_target]]
     df_target_eval = dict_mapping(df_target_eval)
 
     # Set the object types to float values to get processed by the algorithm
@@ -60,7 +55,7 @@ def data_formatting(df: DataFrame, y_target: str):
 
 
 def dict_mapping(df: dict):
-  # Replacing feature attributes with numbers
+    # Replacing feature attributes with numbers
     for feature in df_map_features:
         if feature in df.columns:
             df = df.replace(df_map_features[feature][0])
